@@ -24,11 +24,45 @@ const illiniBlue = 0x13294B;
 const illliniOrange = 0xE84A27;
 
 /**
+ * TODO: write JavaDoc
+ */
+const objectAttributeName = ["State", "Year", "Total"];
+
+/**
+ * An integer array storing all the available year.
+ * Will be modified when the data is imported, we do not set it as constant.
+ */
+var year = [];
+
+/**
+ * An string array storing all the state name.
+ * Will be modified when the data is imported, we do not set it as constant.
+ */
+var stateName = [];
+
+/**
  * JQuery starting point to start visualising data.
  */
 $(function() {
   d3.csv("data.csv").then(function(data) {
+    /* For debug purpuse */
     console.log(data);
+
+    /* push all the available year in the year array */
+    data.forEach(element => {
+      if (!year.includes(element.Year)) {
+        year.push(element.Year)
+      }
+    });
+    year.sort();
+
+    /* push all the state name in the stateName array */
+    data.forEach(element => {
+      if (!stateName.includes(element.State)) {
+        stateName.push(element.State);
+      }
+    })
+    stateName.sort();
     
     var svg = d3.select("#mapVisualiser")
     .append("svg")
