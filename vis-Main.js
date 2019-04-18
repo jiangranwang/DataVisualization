@@ -32,49 +32,50 @@ const objectAttributeName = ["State", "Year", "Total"];
  * An integer array storing all the available year.
  * Will be modified when the data is imported, we do not set it as constant.
  */
-var year = [];
+var allYear = [];
 
 /**
  * An string array storing all the state name.
  * Will be modified when the data is imported, we do not set it as constant.
  */
-var stateName = [];
+var allStateName = [];
 
 /**
  * JQuery starting point to start visualising data.
  */
 $(function() {
   d3.csv("data.csv").then(function(data) {
-    /* For debug purpuse */
+    /* parse the year from string to integer */
+    data.forEach(element => {
+      element.Year = parseInt(element.Year);
+    });
+    /* For debug purpose */
     console.log(data);
 
     /* push all the available year in the year array */
-    data.forEach(element => {
-      if (!year.includes(element.Year)) {
-        year.push(element.Year)
-      }
-    });
-    year.sort();
-
     /* push all the state name in the stateName array */
     data.forEach(element => {
-      if (!stateName.includes(element.State)) {
-        stateName.push(element.State);
+      if (!allStateName.includes(element.State)) {
+        allStateName.push(element.State);
       }
-    })
-    stateName.sort();
+      if (!allYear.includes(element.Year)) {
+        allYear.push(element.Year)
+      }
+    });
+    allYear.sort();
+    allStateName.sort();
     
-    var svg = d3.select("#mapVisualiser")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .style("width", width + margin.left + margin.right)
-    .style("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var mapSVG = d3.select("#chart")
+                    .append("svg")
+                      .attr("width", width + margin.left + margin.right)
+                      .attr("height", height + margin.top + margin.bottom)
+                    .style("width", width + margin.left + margin.right)
+                    .style("height", height + margin.top + margin.bottom)
+                      .append("g")
+                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    drawMap(svg, data);
-    drawChart(svg, data);
-    drawScrollBar(svg, data);
+    drawScrollBar(mapSVG, data);
+    
+    drawMap(mapSVG, data);
   });
 });
