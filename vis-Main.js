@@ -117,6 +117,6 @@ $(function() {
     
     initialiseChart(chartSVG, data);
     drawScrollBar(mapSVG, data);
-    drawMap(mapSVG, data);
+    drawMap(allYear[0], mapSVG, data);
   });
 });
