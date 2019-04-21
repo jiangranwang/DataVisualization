@@ -1,7 +1,7 @@
 /**
  * The space to be taken from the bottom or from the top
  */
-const marginSpace = totalHeight / 4;
+const marginSpace = height / 4;
 
 /**
  * a helper function to put basic elements on it.
@@ -17,12 +17,14 @@ var initialiseChart = function(svg, data) {
 
     var yScale = d3.scaleLinear()
                     .domain([0, biggestIncomingStudent])
-                    .range([totalHeight, 0]);
+                    .range([chartSVGHeight, 0]);
 
     var yAxis = d3.axisLeft().scale(yScale);
 
+    var i = chartSVGMargin.top + chartSVGHeight;
     svg.append("g")
         .call(xAxis);
+        //.attr("transform", "translate(0," + i + ")");
     svg.append("g")
         .call(yAxis);
 }

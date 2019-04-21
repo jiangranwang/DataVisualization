@@ -1,33 +1,37 @@
 /**
- * The height of the whole svg canvases
+ * Margin info for mapSVG
  */
-const totalHeight = 780;
+const mapSVGMargin = new Margin(50, 50, 50, 50);
 
 /**
- * The width of the whole svg canvases
+ * Margin info for chartSVG
  */
-const totalWidth = 1380;
+const chartSVGMargin = new Margin(50, 50, 50, 50);
 
 /**
- * The distance between the chartSVG and the mapSVG
+ * Margin-included height for both SVG canvas
  */
-const innerGap = 50;
+const height = 720;
 
 /**
- * The distance between the left border of mapSVG and the left border of window
- * The two svg canvases is always at the middle of the document
+ * Margin-excluded width of the map SVG canvas
  */
-const mapSVGTransform = (window.innerWidth - totalWidth) / 2;
+const mapSVGWidth = 900 - mapSVGMargin.left - mapSVGMargin.right;
 
 /**
- * The width of the map SVG canvas
+ * Margin-excluded width of the chart SVG canvas
  */
-const mapSVGWidth = totalWidth * 2 / 3;
+const chartSVGWidth = 600 - chartSVGMargin.left - chartSVGMargin.right;
 
 /**
- * The width of the chart SVG canvas
+ * Margin-excluded height of the map SVG canvas
  */
-const chartSVGWidth = totalWidth - mapSVGWidth - innerGap;
+const mapSVGHeight = height - mapSVGMargin.top - mapSVGMargin.bottom;
+
+/**
+ * Margin-excluded height of the chart SVG canvas
+ */
+const chartSVGHeight = height - chartSVGMargin.top - chartSVGMargin.bottom;
 
 /**
  * The HEX value for the colour of illini blue.
@@ -63,12 +67,6 @@ var allStateName = [];
 var biggestIncomingStudent = 0;
 
 /**
- * Smallest number of incoming students
- * value will be changed throughout the operation
- */
-// var smallestIncomingStudent = 30000;
-
-/**
  * JQuery starting point to start visualising data.
  */
 $(function() {
@@ -88,9 +86,6 @@ $(function() {
       if (element["Total"] > biggestIncomingStudent) {
         biggestIncomingStudent = element["Total"];
       }
-      // if (element["Total"] < smallestIncomingStudent) {
-      //   smallestIncomingStudent = element["Total"];
-      // }
     });
     allYear.sort();
     allStateName.sort();
@@ -98,22 +93,21 @@ $(function() {
     console.log(allYear);
     console.log(allStateName);
     console.log(biggestIncomingStudent);
-    // console.log(smallestIncomingStudent);
     console.table(data);
 
     var mapSVG = d3.select("#map")
                     .append("svg")
-                      .attr("width", mapSVGWidth)
-                      .attr("height", totalHeight)
+                      .attr("width", mapSVGWidth + mapSVGMargin.left + mapSVGMargin.right)
+                      .attr("height", height)
                     .append("g")
-                      .attr("transform", "translate(" + mapSVGTransform + "," + 0 + ")")
+                      .attr("transform", "translate(" + mapSVGMargin.left + "," + mapSVGMargin.top + ")")
 
     var chartSVG = d3.select("#map")
                       .append("svg")
-                        .attr("width", chartSVGWidth)
-                        .attr("height", totalHeight)
+                        .attr("width", chartSVGWidth + chartSVGMargin.left + chartSVGMargin.right)
+                        .attr("height", height)
                       .append("g")
-                        .attr("transform", "translate(" + innerGap + "," + 0 + ")")
+                        .attr("transform", "translate(" + chartSVGMargin.left + "," + chartSVGMargin.top + ")")
     
     initialiseChart(chartSVG, data);
     drawScrollBar(mapSVG, data);
