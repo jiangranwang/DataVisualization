@@ -6,4 +6,4 @@
  */
 var drawChart = function(state, svg, data) {
 
-}
+};

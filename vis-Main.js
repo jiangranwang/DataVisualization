@@ -67,15 +67,15 @@ $(function() {
     
     var mapSVG = d3.select("#chart")
                     .append("svg")
-                      .attr("width", width + margin.left + margin.right)
-                      .attr("height", height + margin.top + margin.bottom)
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
                     .style("width", width + margin.left + margin.right)
                     .style("height", height + margin.top + margin.bottom)
-                      .append("g")
-                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    drawScrollBar(mapSVG, data);
+    //drawScrollBar(mapSVG, data);
     
-    drawMap(mapSVG, data);
+    drawMap(allYear[0], mapSVG, data);
   });
 });

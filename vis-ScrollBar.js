@@ -5,4 +5,4 @@
  */
 var drawScrollBar = function(svg, data) {
 
-}
+};

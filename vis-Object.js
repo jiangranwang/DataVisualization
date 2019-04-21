@@ -29,4 +29,4 @@ class Margin {
     constructor () {
         this.bottom, this.top, this.left, this.right = 50;
     }
-}
+};
