@@ -5,5 +5,5 @@
  * @param {Object} data the array of data that we would like to visualise
  */
 var drawChart = function(state, svg, data) {
-console.log(year);
+console.log("jhhjkjn");
 }

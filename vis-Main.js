@@ -64,7 +64,7 @@ $(function() {
     });
     allYear.sort();
     allStateName.sort();
-    
+
     var mapSVG = d3.select("#chart")
                     .append("svg")
                       .attr("width", width + margin.left + margin.right)
@@ -75,7 +75,7 @@ $(function() {
                       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     drawScrollBar(mapSVG, data);
-    
-    drawMap(mapSVG, data);
+
+    //drawMap(mapSVG, data);
   });
 });

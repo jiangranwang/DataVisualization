@@ -43,17 +43,22 @@ var handle = slider.insert("circle", ".track-overlay")
     .attr("r", 9);
 
 slider.transition() // Gratuitous intro!
-    .duration(0)
+    .duration(1000)
     .tween("hue", function() {
       var i = d3.interpolate(0, 2005);
       return function(t) { hue(i(t)); };
     });
-
+  yearPrev = 2005;
   function hue(h) {
     handle.attr("cx", x(h));
     svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
-    year = h;
-    drawChart(svg,data,year);
+    year = Math.round(h);
+    //console.log(yearPrev);
+    if (year!=yearPrev){
+      console.log(year);
+      yearPrev = year;
+      drawChart(year,svg,data);
+    }
   }
 
 }
