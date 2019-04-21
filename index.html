@@ -2,6 +2,45 @@
 <html>
   <head>
     <title>Base template for simple d3.js visualizations</title>
+    <meta charset="utf-8">
+    <style>
+
+    .ticks {
+      font: 10px sans-serif;
+    }
+
+    .track,
+    .track-inset,
+    .track-overlay {
+      stroke-linecap: round;
+    }
+
+    .track {
+      stroke: #000;
+      stroke-opacity: 0.3;
+      stroke-width: 10px;
+    }
+
+    .track-inset {
+      stroke: #ddd;
+      stroke-width: 8px;
+    }
+
+    .track-overlay {
+      pointer-events: stroke;
+      stroke-width: 50px;
+      stroke: transparent;
+      cursor: crosshair;
+    }
+
+    .handle {
+      fill: #fff;
+      stroke: #000;
+      stroke-opacity: 0.5;
+      stroke-width: 1.25px;
+    }
+
+    </style>
     <!-- Functional JavaScript-->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,15 +53,16 @@
     <!-- Custom JavaScript -->
     <script src="vis-Object.js"></script>
     <script src="vis-Main.js"></script>
-    <script src="vis-ScrollBar.js"></script>
     <script src="vis-Map.js"></script>
     <script src="vis-Chart.js"></script>
+    <script src="vis-ScrollBar.js"></script>
   </head>
 
   <body>
     <div class="mapVisualiser">
       <!-- Our d3.js visualization will appear in #chart -->
-      <div id="chart"></div>
+
+      <div id="mapVisualiser"></div>
     </div>
   </body>
 

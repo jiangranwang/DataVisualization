@@ -3,14 +3,10 @@
  * or any other display object.
  */
 class Margin {
-    top;
-    bottom;
-    left;
-    right;
     /**
      * Constructor to create a margin for SVG, html document,
      * and any other display object.
-     * 
+     *
      * @param {int} top the top margin by pixel
      * @param {int} bottom the bottom margin by pixel
      * @param {int} left the left margin by pixel
