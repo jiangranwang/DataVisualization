@@ -67,6 +67,13 @@ var allStateName = [];
 var biggestIncomingStudent = 0;
 
 /**
+ * A color scale for 
+ */
+var colorScale = d3.scaleLinear()
+  .domain([0, 500])
+  .range(["#eff4ff", "#001f63"])
+
+/**
  * JQuery starting point to start visualising data.
  */
 $(function() {
@@ -108,6 +115,51 @@ $(function() {
                         .attr("height", height)
                       .append("g")
                         .attr("transform", "translate(" + chartSVGMargin.left + "," + chartSVGMargin.top + ")")
+
+    var legendPosX = 500;
+    var legendPosY = 600;
+    var defs = mapSVG.append("defs");
+    var linearGradient = defs.append("linearGradient")
+      .attr("id", "linear-gradient");
+    linearGradient
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "100%")
+      .attr("y2", "0%");
+    linearGradient.selectAll("stop")
+      .data( colorScale.range() )
+      .enter().append("stop")
+      .attr("offset", function(i) { return i/(colorScale.range().length-1); })
+      .attr("stop-color", function(d) { return d; });
+    mapSVG.append("rect")
+      .attr("x", legendPosX)
+      .attr("y", legendPosY)
+      .attr("width", 300)
+      .attr("height", 20)
+      .style("fill", "url(#linear-gradient)");
+    mapSVG.append("text")
+      .attr("x", legendPosX)
+      .attr("y", legendPosY+35)
+      .text("0");
+    mapSVG.append("text")
+      .attr("x", legendPosX+280)
+      .attr("y", legendPosY+35)
+      .text("500 Students");
+    mapSVG.append("text")
+      .attr("x", legendPosX+140)
+      .attr("y", legendPosY+35)
+      .text("250");
+    mapSVG.append("rect")
+      .attr("x", legendPosX+125)
+      .attr("y", legendPosY-50)
+      .attr("width", 50)
+      .attr("height", 20)
+      .style("fill", "red");
+    mapSVG.append("text")
+      .attr("x", legendPosX+100)
+      .attr("y", legendPosY-15)
+      .text("30000 Students");
+
     
     initialiseChart(chartSVG, data);
     drawScrollBar(mapSVG, data);
