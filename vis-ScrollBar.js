@@ -52,8 +52,8 @@ slider.transition() // Gratuitous intro!
   function hue(h) {
     handle.attr("cx", x(h));
     svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
-    year = 2018;
+    year = h;
+    drawChart(svg,data,year);
   }
-  console.log(year);
 
 }
