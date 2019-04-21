@@ -44,6 +44,13 @@ const illiniBlue = 0x13294B;
 const illliniOrange = 0xE84A27;
 
 /**
+ * A color scale for the number of students
+ */
+var studentColourScale = d3.scaleLinear()
+  .domain([0, 500])
+  .range(["#eff4ff", "#001f63"])
+
+/**
  * Three core attributes from the data array to be used.
  */
 const objectAttributeName = ["State", "Year", "Total"];
@@ -65,13 +72,6 @@ var allStateName = [];
  * value will be changed throughout the operation
  */
 var biggestIncomingStudent = 0;
-
-/**
- * A color scale for 
- */
-var colorScale = d3.scaleLinear()
-  .domain([0, 500])
-  .range(["#eff4ff", "#001f63"])
 
 /**
  * JQuery starting point to start visualising data.
@@ -127,9 +127,9 @@ $(function() {
       .attr("x2", "100%")
       .attr("y2", "0%");
     linearGradient.selectAll("stop")
-      .data( colorScale.range() )
+      .data( studentColourScale.range() )
       .enter().append("stop")
-      .attr("offset", function(i) { return i/(colorScale.range().length-1); })
+      .attr("offset", function(i) { return i/(studentColourScale.range().length-1); })
       .attr("stop-color", function(d) { return d; });
     mapSVG.append("rect")
       .attr("x", legendPosX)

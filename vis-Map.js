@@ -2,7 +2,7 @@
  * The main function to append map onto the svg we created
  * @param {int} currYear the year we would like to display on the map
  * @param {svg} svg the main canvas to append map onto
- * @param {Object} data the array of data that we would like to visualise
+ * @param {Array} data the array of data that we would like to visualise
  */
 var drawMap = function (currYear, svg, data) {
 	var projection = d3.geoAlbersUsa()
@@ -26,32 +26,30 @@ var drawMap = function (currYear, svg, data) {
           			break;
        			}
       		}
-    	}
-
-
-
+        }
+        
 		svg.selectAll("path")
-		   .data(json.features)
-    	   .enter()
-    	   .append("path")
-   		   .attr("d", path)
- 		   .style("stroke", "white")
- 		   .style("stroke-width", "1")
- 		   .style("fill", function(d) {
- 		   	var value = d.properties.total;
- 		   	if (value < 500)
- 		   		return colorScale(value);
- 		   	else {
- 		   		return "red";
- 		   	}
- 		   })
- 		   .on("mouseover", function(d,i) {
- 		   	d3.select(this)
- 		      .attr("opacity", 0.7)
- 		   })
- 		   .on("mouseout", function(d,i) {
- 		   	d3.select(this)
- 		      .attr("opacity", 1)
- 		   });
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+                .style("stroke", "white")
+                .style("stroke-width", "1")
+                .style("fill", function(d) {
+                    var value = d.properties.total;
+                    if (value < 500)
+                        return studentColourScale(value);
+                    else {
+                        return "red";
+                    }
+                })
+                .on("mouseover", function(d,i) {
+                    d3.select(this)
+                    .attr("opacity", 0.7)
+                })
+                .on("mouseout", function(d,i) {
+                    d3.select(this)
+                    .attr("opacity", 1)
+                });
  	});
 };
