@@ -3,10 +3,6 @@
  * or any other display object.
  */
 class Margin {
-    top;
-    bottom;
-    left;
-    right;
     /**
      * Constructor to create a margin for SVG, html document,
      * and any other display object.
@@ -22,11 +18,4 @@ class Margin {
         this.left = left;
         this.right = right;
     }
-    /**
-     * Default constructor to set the top, bottom,
-     * left, right margin to 50 pixels.
-     */
-    constructor () {
-        this.bottom, this.top, this.left, this.right = 50;
-    }
-};
+}

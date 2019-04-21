@@ -6,14 +6,13 @@
  */
 var drawMap = function (year, svg, data) {
 	var projection = d3.geoAlbersUsa()
-					   .translate([width/2, height/2])
+					   .translate([totalWidth/2-250, totalHeight/2-100])
 					   .scale([1000]);
 
 	var path = d3.geoPath()
 				 .projection(projection);
 
 	d3.json("us-states.json").then(function(json) {
-		
 		svg.selectAll("path")
 		   .data(json.features)
     	   .enter()
