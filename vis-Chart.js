@@ -1,3 +1,7 @@
+/**
+ * The space to be taken from the bottom or from the top
+ */
+const marginSpace = totalHeight / 4;
 
 /**
  * a helper function to put basic elements on it.
@@ -11,30 +15,21 @@ var initialiseChart = function(svg, data) {
     var xAxis = d3.axisBottom()
                     .scale(xScale);
 
-    var yScale = d3.scaleLinear().domain([0, biggestIncomingStudent]).range([totalHeight - 10, 10]);
+    var yScale = d3.scaleLinear()
+                    .domain([0, biggestIncomingStudent])
+                    .range([totalHeight, 0]);
 
     var yAxis = d3.axisLeft().scale(yScale);
 
     svg.append("g")
-        //.attr("id", "xAxis")
         .call(xAxis);
-    
     svg.append("g")
-        //.attr("id", "yAxis")
-        .call(yAxis);   
-
-    allStateName.forEach(element => {
-        svg.append("g")
-            .attr("id", element);
-        /*data.forEach(element => {
-            
-        });*/
-    });
+        .call(yAxis);
 }
 
 /**
  * the main function to append chart onto the svg
- * @param {string} state the name of the state to visualise
+ * @param {String} state the name of the state to visualise
  * @param {svg} svg the main canvas to append chart onto
  * @param {Array} data the array of data that we would like to visualise
  */

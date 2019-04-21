@@ -14,7 +14,7 @@ const totalWidth = 1380;
 const innerGap = 50;
 
 /**
- * The distance between the left border of chartSVG and the left border of window
+ * The distance between the left border of mapSVG and the left border of window
  * The two svg canvases is always at the middle of the document
  */
 const mapSVGTransform = (window.innerWidth - totalWidth) / 2;
@@ -66,7 +66,7 @@ var biggestIncomingStudent = 0;
  * Smallest number of incoming students
  * value will be changed throughout the operation
  */
-var smallestIncomingStudent = 30000;
+// var smallestIncomingStudent = 30000;
 
 /**
  * JQuery starting point to start visualising data.
@@ -88,9 +88,9 @@ $(function() {
       if (element["Total"] > biggestIncomingStudent) {
         biggestIncomingStudent = element["Total"];
       }
-      if (element["Total"] < smallestIncomingStudent) {
-        smallestIncomingStudent = element["Total"];
-      }
+      // if (element["Total"] < smallestIncomingStudent) {
+      //   smallestIncomingStudent = element["Total"];
+      // }
     });
     allYear.sort();
     allStateName.sort();
@@ -98,7 +98,7 @@ $(function() {
     console.log(allYear);
     console.log(allStateName);
     console.log(biggestIncomingStudent);
-    console.log(smallestIncomingStudent);
+    // console.log(smallestIncomingStudent);
     console.table(data);
 
     var mapSVG = d3.select("#map")
@@ -107,13 +107,6 @@ $(function() {
                       .attr("height", totalHeight)
                     .append("g")
                       .attr("transform", "translate(" + mapSVGTransform + "," + 0 + ")")
-    /* Debug purpose */
-    mapSVG.append("line")
-            .attr("x1", 0)
-            .attr("x2", 0)
-            .attr("y1", 0)
-            .attr("y2", totalHeight)
-            .attr("stroke", "black");
 
     var chartSVG = d3.select("#map")
                       .append("svg")
@@ -121,14 +114,6 @@ $(function() {
                         .attr("height", totalHeight)
                       .append("g")
                         .attr("transform", "translate(" + innerGap + "," + 0 + ")")
-
-    /* Debug purpose */
-    chartSVG.append("line")
-              .attr("x1", 0)
-              .attr("x2", 0)
-              .attr("y1", 0)
-              .attr("y2", totalHeight)
-              .attr("stroke", "red")
     
     initialiseChart(chartSVG, data);
     drawScrollBar(mapSVG, data);
