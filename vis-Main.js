@@ -1,17 +1,33 @@
 /**
- * Margin object that defines the margin of the svg.
+ * The height of the whole svg canvases
  */
-const margin = new Margin(50, 50, 50, 50);
+const totalHeight = 780;
 
 /**
- * The height of the svg canvas
+ * The width of the whole svg canvases
  */
-const height = 2000;
+const totalWidth = 1380;
 
 /**
- * The width of the svg canvas
+ * The distance between the chartSVG and the mapSVG
  */
-const width = 2000;
+const innerGap = 50;
+
+/**
+ * The distance between the left border of chartSVG and the left border of window
+ * The two svg canvases is always at the middle of the document
+ */
+const mapSVGTransform = (window.innerWidth - totalWidth) / 2;
+
+/**
+ * The width of the map SVG canvas
+ */
+const mapSVGWidth = totalWidth * 2 / 3;
+
+/**
+ * The width of the chart SVG canvas
+ */
+const chartSVGWidth = totalWidth - mapSVGWidth - innerGap;
 
 /**
  * The HEX value for the colour of illini blue.
@@ -24,7 +40,7 @@ const illiniBlue = 0x13294B;
 const illliniOrange = 0xE84A27;
 
 /**
- * TODO: write JavaDoc
+ * Three core attributes from the data array to be used.
  */
 const objectAttributeName = ["State", "Year", "Total"];
 
@@ -41,41 +57,81 @@ var allYear = [];
 var allStateName = [];
 
 /**
+ * Biggest number of incoming students
+ * value will be changed throughout the operation
+ */
+var biggestIncomingStudent = 0;
+
+/**
+ * Smallest number of incoming students
+ * value will be changed throughout the operation
+ */
+var smallestIncomingStudent = 30000;
+
+/**
  * JQuery starting point to start visualising data.
  */
 $(function() {
   d3.csv("data.csv").then(function(data) {
-    /* parse the year from string to integer */
-    data.forEach(element => {
-      element.Year = parseInt(element.Year);
-    });
-    /* For debug purpose */
-    console.log(data);
-
+    /* parse the year and the total number of incoming student from string to integer */
     /* push all the available year in the year array */
     /* push all the state name in the stateName array */
     data.forEach(element => {
+      element.Year = parseInt(element.Year);
+      element.Total = parseInt(element.Total);
       if (!allStateName.includes(element.State)) {
         allStateName.push(element.State);
       }
       if (!allYear.includes(element.Year)) {
         allYear.push(element.Year)
       }
+      if (element["Total"] > biggestIncomingStudent) {
+        biggestIncomingStudent = element["Total"];
+      }
+      if (element["Total"] < smallestIncomingStudent) {
+        smallestIncomingStudent = element["Total"];
+      }
     });
     allYear.sort();
     allStateName.sort();
-    
-    var mapSVG = d3.select("#chart")
-                    .append("svg")
-                      .attr("width", width + margin.left + margin.right)
-                      .attr("height", height + margin.top + margin.bottom)
-                    .style("width", width + margin.left + margin.right)
-                    .style("height", height + margin.top + margin.bottom)
-                      .append("g")
-                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    drawScrollBar(mapSVG, data);
+    console.log(allYear);
+    console.log(allStateName);
+    console.log(biggestIncomingStudent);
+    console.log(smallestIncomingStudent);
+    console.table(data);
+
+    var mapSVG = d3.select("#map")
+                    .append("svg")
+                      .attr("width", mapSVGWidth)
+                      .attr("height", totalHeight)
+                    .append("g")
+                      .attr("transform", "translate(" + mapSVGTransform + "," + 0 + ")")
+    /* Debug purpose */
+    mapSVG.append("line")
+            .attr("x1", 0)
+            .attr("x2", 0)
+            .attr("y1", 0)
+            .attr("y2", totalHeight)
+            .attr("stroke", "black");
+
+    var chartSVG = d3.select("#map")
+                      .append("svg")
+                        .attr("width", chartSVGWidth)
+                        .attr("height", totalHeight)
+                      .append("g")
+                        .attr("transform", "translate(" + innerGap + "," + 0 + ")")
+
+    /* Debug purpose */
+    chartSVG.append("line")
+              .attr("x1", 0)
+              .attr("x2", 0)
+              .attr("y1", 0)
+              .attr("y2", totalHeight)
+              .attr("stroke", "red")
     
+    initialiseChart(chartSVG, data);
+    drawScrollBar(mapSVG, data);
     drawMap(mapSVG, data);
   });
 });
