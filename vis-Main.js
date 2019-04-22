@@ -36,12 +36,12 @@ const chartSVGHeight = height - chartSVGMargin.top - chartSVGMargin.bottom;
 /**
  * The colour to denote 0 students.
  */
-const startColour = "#EEEF63"; //"#eff4ff";
+const startColour = "#000089"; //"#eff4ff";
 
 /**
  * The colour to denote the highest number of students.
  */
-const endColour = "#B25E4F"; //"#001f63";
+const endColour = "#ffa600"; //"#001f63";
 
 /**
  * Three core attributes from the data array to be used.
@@ -69,13 +69,25 @@ var highestIncomingStudent = 0;
 /**
  * A color scale for the number of students
  */
-const studentColourScale = d3.scaleLog()
-  .domain([1, 30000])
-  .range([startColour, endColour])
+const studentColourScale = d3.scaleLinear()
+  .domain([1, 1000])
+  .range([startColour, endColour]);
 
 /**
-  * Year var that record the scrollbar input, drawMap should respond to this variables.
-  */
+ * A function to transform number of students to colour.
+ * @param {Number} number number of students.
+ */
+const studentNumberToColour = function(number) {
+  if (number < 1000) {
+    return studentColourScale(number)
+  }
+  return "red";
+}
+
+/**
+ * Year variable that record the scrollbar input.
+ * drawMap() should respond to this variables.
+ */
 var yearPrev = 2005;
 var year = yearPrev;
 
@@ -103,16 +115,18 @@ $(function() {
     allYear.sort();
     allStateName.sort();
 
-    d3.select("#map")
+    d3.select("#visualisation")
         .append("svg")
+          .attr("id", "mapSVGFramework")
           .attr("width", mapSVGWidth + mapSVGMargin.left + mapSVGMargin.right)
           .attr("height", height)
         .append("g")
           .attr("transform", "translate(" + mapSVGMargin.left + "," + mapSVGMargin.top + ")")
           .attr("id", "mapSVG");
 
-    d3.select("#map")
+    d3.select("#visualisation")
         .append("svg")
+          .attr("id", "chartSVGFramework")
           .attr("width", chartSVGWidth + chartSVGMargin.left + chartSVGMargin.right)
           .attr("height", height)
         .append("g")
@@ -120,8 +134,8 @@ $(function() {
           .attr("id", "chartSVG");
 
     initialiseMap();
-    initialiseChart(data);
     drawMap(allYear[0], data);
     drawScrollBar(data);
+    initialiseChart(data);
   });
 });
