@@ -33,22 +33,8 @@ const mapSVGHeight = height - mapSVGMargin.top - mapSVGMargin.bottom;
  */
 const chartSVGHeight = height - chartSVGMargin.top - chartSVGMargin.bottom;
 
-/**
- * The HEX value for the colour of illini blue.
- */
-const illiniBlue = 0x13294B;
-
-/**
- * The HEX value for the colour of illini orange.
- */
-const illliniOrange = 0xE84A27;
-
-/**
- * A color scale for the number of students
- */
-var studentColourScale = d3.scaleLinear()
-  .domain([0, 500])
-  .range(["#eff4ff", "#001f63"])
+const startColour = "#EEEF63"; //"#eff4ff";
+const endColour = "#B25E4F"; //"#001f63";
 
 /**
  * Three core attributes from the data array to be used.
@@ -74,10 +60,17 @@ var allStateName = [];
 var biggestIncomingStudent = 0;
 
 /**
+ * A color scale for the number of students
+ */
+var studentColourScale = d3.scaleLog()
+  .domain([1, 30000])
+  .range([startColour, endColour])
+
+/**
  * JQuery starting point to start visualising data.
  */
 $(function() {
-  d3.csv("data.csv").then(function(data) {
+  d3.csv("data-modified.csv").then(function(data) {
     /* parse the year and the total number of incoming student from string to integer */
     /* push all the available year in the year array */
     /* push all the state name in the stateName array */
@@ -97,11 +90,6 @@ $(function() {
     allYear.sort();
     allStateName.sort();
 
-    console.log(allYear);
-    console.log(allStateName);
-    console.log(biggestIncomingStudent);
-    console.table(data);
-
     var mapSVG = d3.select("#map")
                     .append("svg")
                       .attr("width", mapSVGWidth + mapSVGMargin.left + mapSVGMargin.right)
@@ -115,52 +103,7 @@ $(function() {
                         .attr("height", height)
                       .append("g")
                         .attr("transform", "translate(" + chartSVGMargin.left + "," + chartSVGMargin.top + ")")
-
-    var legendPosX = 500;
-    var legendPosY = 600;
-    var defs = mapSVG.append("defs");
-    var linearGradient = defs.append("linearGradient")
-      .attr("id", "linear-gradient");
-    linearGradient
-      .attr("x1", "0%")
-      .attr("y1", "0%")
-      .attr("x2", "100%")
-      .attr("y2", "0%");
-    linearGradient.selectAll("stop")
-      .data( studentColourScale.range() )
-      .enter().append("stop")
-      .attr("offset", function(i) { return i/(studentColourScale.range().length-1); })
-      .attr("stop-color", function(d) { return d; });
-    mapSVG.append("rect")
-      .attr("x", legendPosX)
-      .attr("y", legendPosY)
-      .attr("width", 300)
-      .attr("height", 20)
-      .style("fill", "url(#linear-gradient)");
-    mapSVG.append("text")
-      .attr("x", legendPosX)
-      .attr("y", legendPosY+35)
-      .text("0");
-    mapSVG.append("text")
-      .attr("x", legendPosX+280)
-      .attr("y", legendPosY+35)
-      .text("500 Students");
-    mapSVG.append("text")
-      .attr("x", legendPosX+140)
-      .attr("y", legendPosY+35)
-      .text("250");
-    mapSVG.append("rect")
-      .attr("x", legendPosX+125)
-      .attr("y", legendPosY-50)
-      .attr("width", 50)
-      .attr("height", 20)
-      .style("fill", "red");
-    mapSVG.append("text")
-      .attr("x", legendPosX+100)
-      .attr("y", legendPosY-15)
-      .text("30000 Students");
-
-    
+    initialiseMap(mapSVG);
     initialiseChart(chartSVG, data);
     drawScrollBar(mapSVG, data);
     drawMap(allYear[0], mapSVG, data);
