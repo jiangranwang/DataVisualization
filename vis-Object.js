@@ -18,6 +18,7 @@ class Margin {
         this.left = left;
         this.right = right;
     }
+  }
     /**
      * Default constructor to set the top, bottom,
      * left, right margin to 50 pixels.
@@ -25,4 +26,3 @@ class Margin {
     // constructor () {
     //     this.bottom, this.top, this.left, this.right = 50;
     // }
-}

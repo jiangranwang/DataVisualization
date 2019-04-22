@@ -1,14 +1,13 @@
 /**
  * the main function to append scroll bar onto
- * @param {svg} svg the main canvas to append scroll bar onto
- * @param {*} data the data we would like to visualise
+ * @param {Array} data the data we would like to visualise
  */
 
-var drawScrollBar = function(svg, data) {
+var drawScrollBar = function(data) {
   svg = d3.select("svg");
   var x = d3.scaleLinear()
     .domain([1998, 2017])
-    .range([0, width])
+    .range([0, mapSVGWidth])
     .clamp(true);
 
 var slider = svg.append("g")
@@ -51,13 +50,13 @@ slider.transition() // Gratuitous intro!
   yearPrev = 2005;
   function hue(h) {
     handle.attr("cx", x(h));
-    svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
+    //svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
     year = Math.round(h);
     //console.log(yearPrev);
     if (year!=yearPrev){
       console.log(year);
       yearPrev = year;
-      drawChart(year,svg,data);
+      drawMap(year,data);
     }
   }
 
