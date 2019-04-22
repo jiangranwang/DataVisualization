@@ -31,6 +31,18 @@ var initialiseChart = function(data) {
         .call(xAxis);
     svg.append("g")
         .call(yAxis);
+    
+    var chartTitleGroup = svg.append("g")
+                                .attr("id", "chartTitle");
+    
+    chartTitleGroup.append("text")
+        .text("Year")
+        .attr("transform", "translate(" + chartSVGwidth / 2 + "," + chartSVGheight + ")");
+    
+    chartTitleGroup.append("text")
+        .text("Number of Incoming Students")
+        .attr()
+        .attr("transform", "translate(" + chartSVGwidth / 2 + "," + chartSVGheight + ")");
 
     allStateName.forEach(stateName => {
         svg.append("g").attr("id", stateName).style("Visibility", "hidden");
