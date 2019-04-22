@@ -74,6 +74,12 @@ const studentColourScale = d3.scaleLog()
   .range([startColour, endColour])
 
 /**
+  * Year var that record the scrollbar input, drawMap should respond to this variables.
+  */
+var yearPrev = 2005;
+var year = yearPrev;
+
+/**
  * JQuery starting point to start visualising data.
  */
 $(function() {

@@ -12,7 +12,7 @@ var drawScrollBar = function(data) {
 
 var slider = svg.append("g")
     .attr("class", "slider")
-    .attr("transform", "translate(" + 50 + "," + 100 + ")");
+    .attr("transform", "translate(" + 50 + "," + mapSVGHeight/10 + ")");
 
 slider.append("line")
     .attr("class", "track")
@@ -47,14 +47,14 @@ slider.transition() // Gratuitous intro!
       var i = d3.interpolate(0, 2005);
       return function(t) { hue(i(t)); };
     });
-  yearPrev = 2005;
+  //yearPrev = 2005;
   function hue(h) {
     handle.attr("cx", x(h));
     //svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
     year = Math.round(h);
     //console.log(yearPrev);
     if (year!=yearPrev){
-      console.log(year);
+      //console.log(year);
       yearPrev = year;
       drawMap(year,data);
     }
