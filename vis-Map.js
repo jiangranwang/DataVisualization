@@ -52,7 +52,6 @@ var initialiseMap = function () {
 /**
  * The main function to append map onto the svg we created
  * @param {int} currYear the year we would like to display on the map
- * @param {svg} svg the main canvas to append map onto
  * @param {Array} data the array of data that we would like to visualise
  */
 var drawMap = function (currYear, data) {
@@ -61,7 +60,14 @@ var drawMap = function (currYear, data) {
 					   .scale([mapSVGWidth]);
 
 	var path = d3.geoPath()
-				 .projection(projection);
+         .projection(projection);
+         
+  var mapTip = d3.tip()
+         .attr("class", "mapMouseOverTip")
+         .html((d) => {
+            return d.properties.name;
+         });
+  svg.call(mapTip);
 
 	d3.json("us-states.json").then(function(json) {
 		for (var i = 0; i < data.length; i++) {
@@ -76,7 +82,7 @@ var drawMap = function (currYear, data) {
         }
       }
     }
-        
+     
 		svg.selectAll("path")
           .data(json.features)
           .enter()
@@ -89,13 +95,22 @@ var drawMap = function (currYear, data) {
                 if (value < 500) { return studentColourScale(value); }
                 else { return "red"; }
             })
-            .on("mouseover", function() {
+            .on("mouseover", function(d) {
                 d3.select(this)
-                  .attr("opacity", 0.7)
+                  .attr("opacity", 0.7);
+                mapTip.show(d);
             })
-            .on("mouseout", function() {
+            .on("mouseout", function(d) {
                 d3.select(this)
-                  .attr("opacity", 1)
+                  .attr("opacity", 1);
+                mapTip.hide(d);
+            })
+            .on("click", function(d) {
+              try {
+                changeVisibility(d.properties.name);
+              } catch {
+                alert("No available data for this state");
+              }
             });
  	});
 };

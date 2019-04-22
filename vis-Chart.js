@@ -20,7 +20,7 @@ var initialiseChart = function(data) {
                     .domain([1, highestIncomingStudent])
                     .range([chartSVGHeight, 0]);
 
-    var colourScale = studentColourScale;
+    var colourScale = studentNumberToColour;
 
     // TODO: change the tick of the y Axis
     var yAxis = d3.axisLeft().scale(totalStudentScale);
@@ -40,17 +40,16 @@ var initialiseChart = function(data) {
     svg.append("g")
         .call(yAxis);
     
-    var chartTitleGroup = svg.append("g")
-                                .attr("id", "chartTitle");
+    var chartTitleGroup = svg.append("g").attr("id", "chartTitle");
     
     chartTitleGroup.append("text")
         .text("Year")
-        .attr("transform", "translate(" + chartSVGwidth / 2 + "," + chartSVGheight + ")");
+        .attr("transform", "translate(" + chartSVGWidth / 2 + "," + chartSVGHeight + ")");
     
     chartTitleGroup.append("text")
         .text("Number of Incoming Students")
-        .attr()
-        .attr("transform", "translate(" + chartSVGwidth / 2 + "," + chartSVGheight + ")");
+        .attr("transform", "rotate(270)")
+        .attr("transform", "translate(" + chartSVGWidth / 2 + "," + 0 + ")");
 
     allStateName.forEach(stateName => {
         svg.append("g").attr("id", stateName).style("Visibility", "hidden");
