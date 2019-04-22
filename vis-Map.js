@@ -1,13 +1,14 @@
 /**
  * a helper function to put basic elements on the mapSVG.
- * @param {svg} mapSVG the main canvas to append basic elements
  */
-var initialiseMap = function (mapSVG) {
+var initialiseMap = function () {
+    var mapSVG = d3.select("#mapSVG");
+
     var legendPosX = 500;
     var legendPosY = 600;
     var defs = mapSVG.append("defs");
-    var linearGradient = defs.append("linearGradient")
-      .attr("id", "linear-gradient");
+
+    var linearGradient = defs.append("linearGradient").attr("id", "linear-gradient");
     linearGradient
       .attr("x1", "0%")
       .attr("y1", "0%")
@@ -54,9 +55,9 @@ var initialiseMap = function (mapSVG) {
  * @param {svg} svg the main canvas to append map onto
  * @param {Array} data the array of data that we would like to visualise
  */
-var drawMap = function (currYear, svg, data) {
+var drawMap = function (currYear, data) {
+  var svg = d3.select("#mapSVG");
 	var projection = d3.geoAlbersUsa()
-					   //.translate([totalWidth/2-250, totalHeight/2-100])
 					   .scale([mapSVGWidth]);
 
 	var path = d3.geoPath()
@@ -64,42 +65,37 @@ var drawMap = function (currYear, svg, data) {
 
 	d3.json("us-states.json").then(function(json) {
 		for (var i = 0; i < data.length; i++) {
-      		if (data[i].Year != currYear) {
-        		continue;
-     		}
-      		var dataState = data[i].State;
-      		var dataTotal = data[i].Total;
-      		for (var j = 0; j < json.features.length; j++) {
-      			var jsonState = json.features[j].properties.name;
-        		if (jsonState == dataState) {
-          			json.features[j].properties.total = dataTotal;
-          			break;
-       			}
-      		}
+      if (data[i].Year != currYear) { continue; }
+      var dataState = data[i].State;
+      var dataTotal = data[i].Total;
+      for (var j = 0; j < json.features.length; j++) {
+        var jsonState = json.features[j].properties.name;
+        if (jsonState == dataState) {
+            json.features[j].properties.total = dataTotal;
+            break;
         }
+      }
+    }
         
 		svg.selectAll("path")
-            .data(json.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-                .style("stroke", "white")
-                .style("stroke-width", "1")
-                .style("fill", function(d) {
-                    var value = d.properties.total;
-                    if (value < 500)
-                        return studentColourScale(value);
-                    else {
-                        return "red";
-                    }
-                })
-                .on("mouseover", function(d,i) {
-                    d3.select(this)
-                    .attr("opacity", 0.7)
-                })
-                .on("mouseout", function(d,i) {
-                    d3.select(this)
-                    .attr("opacity", 1)
-                });
+          .data(json.features)
+          .enter()
+          .append("path")
+          .attr("d", path)
+            .style("stroke", "white")
+            .style("stroke-width", "1")
+            .style("fill", function(d) {
+                var value = d.properties.total;
+                if (value < 500) { return studentColourScale(value); }
+                else { return "red"; }
+            })
+            .on("mouseover", function() {
+                d3.select(this)
+                  .attr("opacity", 0.7)
+            })
+            .on("mouseout", function() {
+                d3.select(this)
+                  .attr("opacity", 1)
+            });
  	});
 };

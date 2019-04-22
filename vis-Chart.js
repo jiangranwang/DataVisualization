@@ -1,19 +1,14 @@
 /**
- * The space to be taken from the bottom or from the top
- */
-const marginSpace = height / 4;
-
-/**
  * Radius of each dot.
  */
 const dotRadius = 1;
 
 /**
  * a helper function to put basic elements on the chartSVG.
- * @param {svg} svg the main canvas to append basic elements
  * @param {Array} data the array of data that we would like to visualise
  */
-var initialiseChart = function(svg, data) {
+var initialiseChart = function(data) {
+    var svg = d3.select("#chartSVG");
     var yearScale = d3.scaleLinear()
                     .domain([allYear[0], allYear[allYear.length - 1]])
                     .range([0, chartSVGWidth]);
@@ -22,7 +17,7 @@ var initialiseChart = function(svg, data) {
 
     var totalStudentScale = d3.scaleLog()
                     .base(10)
-                    .domain([1, biggestIncomingStudent])
+                    .domain([1, highestIncomingStudent])
                     .range([chartSVGHeight, 0]);
 
     var colourScale = studentColourScale;
@@ -64,13 +59,15 @@ var initialiseChart = function(svg, data) {
 }
 
 /**
- * the main function to append chart onto the svg
- * @param {String} state the name of the state to visualise
+ * A helper function to change certain state's chart visibility.
+ * @param {String} state the name of the state to have its visibility changed
  */
 var changeVisibility = function(state) {
     if (!allStateName.includes(state)) {
+        alert("Invalid operation!");
         throw "invalid input";
     }
-    var group = document.getElementById(state);
+    // equivalent to document.getElementById if we select element by d3 with .node() command
+    var group = d3.select("#" + state).node();
     group.style.visibility = group.style.visibility === "visible" ? "hidden" : "visible";
 }
