@@ -1,7 +1,7 @@
 /**
  * Radius of each dot.
  */
-const dotRadius = 1;
+const dotRadius = 3;
 
 /**
  * a helper function to put basic elements on the chartSVG.
@@ -26,6 +26,14 @@ var initialiseChart = function(data) {
     var yAxis = d3.axisLeft().scale(totalStudentScale);
                     //.ticks([1, 10, 100, 500, 10000, 30000]);
 
+    // TODO: tip CSS apparence
+    var theTip = d3.tip()
+        .attr("class", "dotMouseOverTip")
+        .html((d) => {
+            return d["Total"] + " students comming from " + d["State"] + " in " + d["Year"];
+        });
+    svg.call(theTip);
+    
     svg.append("g")
         .attr("transform", "translate(0" + "," + chartSVGHeight + ")")
         .call(xAxis);
@@ -44,7 +52,13 @@ var initialiseChart = function(data) {
                 .attr("r", dotRadius)
                 .attr("fill", "white")
                 .attr("stroke", colourScale(data[i]["Total"]))
-                .attr("id", data[i]["Year"] + " " + data[i]["State"]);
+                .attr("id", data[i]["Year"] + " " + data[i]["State"])
+                .on("mouseover", (d) => {
+                    theTip.show(data[i]);
+                })
+                .on("mouseout", () => {
+                    theTip.hide(data[i]);
+                });
         if (i < data.length - 1 && data[i]["State"] == data[i + 1]["State"]) {
             d3.select("#" + data[i]["State"])
                 .append("line")
@@ -52,7 +66,7 @@ var initialiseChart = function(data) {
                 .attr("x2", yearScale(data[i + 1]["Year"]))
                 .attr("y1", totalStudentScale(data[i]["Total"]))
                 .attr("y2", totalStudentScale(data[i + 1]["Total"]))
-                // TODO: Linear Changing colour
+                // TODO: Linear Changing colour for each line
                 .attr("stroke", colourScale(data[i]["Total"]));
         }
     }
