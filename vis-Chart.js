@@ -31,10 +31,16 @@ var initialiseChart = function(data) {
         .attr('class', 'd3-tip')
         .offset([-5, 0])
         .html((d) => {
-            if (d["Total"] <= 1) {
-                return "<u>" + d["Total"] + "</u> student comming from <u>" + d["State"] + "</u> in <u>" + d["Year"] + "</u>.";
-            }
-            return "<u>" + d["Total"] + "</u> students comming from <u>" + d["State"] + "</u> in <u>" + d["Year"] + "</u>.";
+            return "<div style='text-align: center;margin-left:auto; margin-right:auto;'><big>" + d["State"] + "<br><small><br>" +
+                  "<div class='row' style='text-align: center; margin-left:auto; margin-right:auto;'>" +
+                  "<div class='col-6' style='border-right: 1px solid white;'>" +
+                    '<span style="font-size: 22px;">' + d["Year"] + '</span><br>' +
+                    '<span style="font-size: 15px; text-align: center;">year</span><br>' +
+                  "</div>" +
+                  "<div class='col-6'>" +
+                    '<span style="font-size: 22px;"><u>' + d["Total"] + '</u></span><br>' +
+                    '<span style="font-size: 15px;">students</span><br>' +
+                  "</div>"
         });
     svg.call(dotTip);
     

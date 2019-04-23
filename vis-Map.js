@@ -82,7 +82,16 @@ var drawMap = function (currYear, data) {
          .attr('class', 'd3-tip')
          .offset([-5, 0])
          .html((d) => {
-            return d.properties.name;
+            return "<div style='text-align: center;margin-left:auto; margin-right:auto;'><big>" + d.properties.name + "<br><small><br>" +
+                  "<div class='row' style='text-align: center; margin-left:auto; margin-right:auto;'>" +
+                  "<div class='col-6' style='border-right: 1px solid white;'>" +
+                    '<span style="font-size: 22px;">' + currYear + '</span><br>' +
+                    '<span style="font-size: 15px; text-align: center;">year</span><br>' +
+                  "</div>" +
+                  "<div class='col-6'>" +
+                    '<span style="font-size: 22px;"><u>' + d.properties.total + '</u></span><br>' +
+                    '<span style="font-size: 15px;">students</span><br>' +
+                  "</div>"
          });
   svg.call(mapTip);
 

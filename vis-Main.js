@@ -148,7 +148,7 @@ $(function() {
           .attr("id", "chartSVG");
 
     initialiseMap();
-    drawMap(allYear[0], data);
+    //drawMap(allYear[0], data);
     drawScrollBar(data);
     initialiseChart(data);
   });
