@@ -20,7 +20,6 @@ var initialiseChart = function(data) {
                     .domain([1, highestIncomingStudent])
                     .range([chartSVGHeight, 0]);
     var colourScale = studentNumberToColour;
-    // TODO: change the tick of the y Axis
     var yAxis = d3.axisLeft().scale(totalStudentScale).ticks(100).tickFormat(d3.format(",.2r"));
     svg.append("g")
         .attr("transform", "translate(0" + "," + chartSVGHeight + ")")
