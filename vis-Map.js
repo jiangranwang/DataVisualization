@@ -64,6 +64,7 @@ var drawMap = function (currYear, data) {
          
   var mapTip = d3.tip()
          .attr('class', 'd3-tip')
+         .offset([-5, 0])
          .html((d) => {
             return d.properties.name;
          });
@@ -107,7 +108,7 @@ var drawMap = function (currYear, data) {
             })
             .on("click", function(d) {
               try {
-                changeVisibility(d.properties.name);
+                changeVisibility(d.properties.name.replace(/[^a-zA-Z]/g, ""));
               } catch {
                 alert("No available data for this state");
               }

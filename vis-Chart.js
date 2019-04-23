@@ -28,7 +28,8 @@ var initialiseChart = function(data) {
 
     // TODO: tip CSS apparence
     var theTip = d3.tip()
-        .attr("class", "dotMouseOverTip")
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
         .html((d) => {
             return d["Total"] + " students comming from " + d["State"] + " in " + d["Year"];
         });
@@ -56,7 +57,7 @@ var initialiseChart = function(data) {
     })
 
     for (let i = 0; i < data.length; i++) {
-        d3.select("#" + data[i]["State"])
+        d3.select("#" + data[i]["State"].replace(/[^a-zA-Z]/g, ""))
             .append("circle")
                 .attr("cx", yearScale(data[i]["Year"]))
                 .attr("cy", totalStudentScale(data[i]["Total"]))
@@ -71,7 +72,7 @@ var initialiseChart = function(data) {
                     theTip.hide(data[i]);
                 });
         if (i < data.length - 1 && data[i]["State"] == data[i + 1]["State"]) {
-            d3.select("#" + data[i]["State"])
+            d3.select("#" + data[i]["State"].replace(/[^a-zA-Z]/g, ""))
                 .append("line")
                 .attr("x1", yearScale(data[i]["Year"]))
                 .attr("x2", yearScale(data[i + 1]["Year"]))
@@ -93,6 +94,6 @@ var changeVisibility = function(state) {
         throw "invalid input";
     }
     // equivalent to document.getElementById if we select element by d3 with .node() command
-    var group = d3.select("#" + state).node();
+    var group = d3.select("#" + state.replace(/[^a-zA-Z]/g, "")).node();
     group.style.visibility = group.style.visibility === "visible" ? "hidden" : "visible";
 }

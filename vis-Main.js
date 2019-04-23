@@ -102,8 +102,8 @@ $(function() {
     data.forEach(element => {
       element.Year = parseInt(element.Year);
       element.Total = parseInt(element.Total);
-      if (!allStateName.includes(element.State)) {
-        allStateName.push(element.State);
+      if (!allStateName.includes(element.State.replace(/[^a-zA-Z]/g, ""))) {
+        allStateName.push(element.State.replace(/[^a-zA-Z]/g, ""));
       }
       if (!allYear.includes(element.Year)) {
         allYear.push(element.Year)
