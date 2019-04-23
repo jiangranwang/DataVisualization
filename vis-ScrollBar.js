@@ -45,19 +45,18 @@ var drawScrollBar = function(data) {
     slider.transition() // Gratuitous intro!
         .duration(1000)
         .tween("hue", function() {
-            var i = d3.interpolate(0, 2005);
+            //var i = d3.interpolate(allYear[0], allYear[0]);
             return function(t) {
-                hue(i(t));
+                hue(allYear[0]);
             };
         });
     //yearPrev = 2005;
     function hue(h) {
-        handle.attr("cx", x(h));
-        //svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
         year = Math.round(h);
+        handle.attr("cx", x(year));
+        //svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
         //console.log(yearPrev);
         if (year!=yearPrev) {
-            //console.log(year);
             yearPrev = year;
             drawMap(year,data);
         }

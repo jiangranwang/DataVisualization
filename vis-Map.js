@@ -4,7 +4,7 @@
 var initialiseMap = function () {
     var mapSVG = d3.select("#mapSVG");
 
-    var legendPosX = 500;
+    var legendPosX = 100;
     var legendPosY = 600;
     var defs = mapSVG.append("defs");
 
@@ -17,7 +17,7 @@ var initialiseMap = function () {
     linearGradient.selectAll("stop")
       .data( studentColourScale.range() )
       .enter().append("stop")
-      .attr("offset", function(i) { return i/(studentColourScale.range().length-1); })
+      .attr("offset", function(d,i) { return i/(studentColourScale.range().length-1); })
       .attr("stop-color", function(d) { return d; });
     mapSVG.append("rect")
       .attr("x", legendPosX)
@@ -32,11 +32,11 @@ var initialiseMap = function () {
     mapSVG.append("text")
       .attr("x", legendPosX+280)
       .attr("y", legendPosY+35)
-      .text("500 Students");
+      .text("1500 Students(TO-FIX)");
     mapSVG.append("text")
       .attr("x", legendPosX+140)
       .attr("y", legendPosY+35)
-      .text("250");
+      .text("750");
     mapSVG.append("rect")
       .attr("x", legendPosX+125)
       .attr("y", legendPosY-50)
@@ -84,18 +84,19 @@ var drawMap = function (currYear, data) {
       }
     }
      
-		svg.selectAll("path")
+		var graph = svg.selectAll("path")
           .data(json.features)
-          .enter()
+    graph.enter()
           .append("path")
+          .merge(graph)
           .attr("d", path)
             .style("stroke", "white")
             .style("stroke-width", "1")
             .style("fill", function(d) {
                 var value = d.properties.total;
-                if (value < 500) { return studentColourScale(value); }
-                else { return "red"; }
+                return studentNumberToColour(value);
             })
+            .attr("opacity", 1)
             .on("mouseover", function(d) {
                 d3.select(this)
                   .attr("opacity", 0.7);
@@ -107,11 +108,8 @@ var drawMap = function (currYear, data) {
                 mapTip.hide(d);
             })
             .on("click", function(d) {
-              try {
                 changeVisibility(d.properties.name.replace(/[^a-zA-Z]/g, ""));
-              } catch {
-                alert("No available data for this state");
-              }
-            });
+            })
+            .exit().remove();
  	});
 };

@@ -36,12 +36,12 @@ const chartSVGHeight = height - chartSVGMargin.top - chartSVGMargin.bottom;
 /**
  * The colour to denote 0 students.
  */
-const startColour = "#000089"; //"#eff4ff";
+const startColour = "#eff4ff"; //"#000089";
 
 /**
  * The colour to denote the highest number of students.
  */
-const endColour = "#ffa600"; //"#001f63";
+const endColour = "#001f63"; //"#ffa600"; 
 
 /**
  * Three core attributes from the data array to be used.
@@ -66,20 +66,23 @@ var allStateName = [];
  */
 var highestIncomingStudent = 0;
 
+var IncomingStudentThreshold = 5000;
+
 /**
  * A color scale for the number of students
  */
-const studentColourScale = d3.scaleLinear()
-  .domain([1, 1000])
+var studentColourScale = d3.scaleLog()
+  .base(2)
+  .domain([1, IncomingStudentThreshold])
   .range([startColour, endColour]);
 
 /**
  * A function to transform number of students to colour.
  * @param {Number} number number of students.
  */
-const studentNumberToColour = function(number) {
-  if (number < 1000) {
-    return studentColourScale(number)
+var studentNumberToColour = function(number) {
+  if (number < IncomingStudentThreshold) {
+    return studentColourScale(number);
   }
   return "red";
 }
@@ -88,7 +91,7 @@ const studentNumberToColour = function(number) {
  * Year variable that record the scrollbar input.
  * drawMap() should respond to this variables.
  */
-var yearPrev = 2005;
+var yearPrev = 0;
 var year = yearPrev;
 
 /**
