@@ -36,7 +36,8 @@ var initialiseChart = function(data) {
     .attr("x2", yearScale(allYear[0]))
     .attr("y1", 0)
     .attr("y2", chartSVGHeight);
-        
+    
+    /* ---------- Tip for each dots ---------- */
     var dotTip = d3.tip()
         .attr('class', 'd3-tip')
         .offset([-5, 0])
