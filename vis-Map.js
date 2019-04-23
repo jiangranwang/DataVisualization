@@ -63,7 +63,7 @@ var drawMap = function (currYear, data) {
          .projection(projection);
          
   var mapTip = d3.tip()
-         .attr("class", "mapMouseOverTip")
+         .attr('class', 'd3-tip')
          .html((d) => {
             return d.properties.name;
          });

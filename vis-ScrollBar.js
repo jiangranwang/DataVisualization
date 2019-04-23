@@ -6,7 +6,7 @@ var drawScrollBar = function(data) {
     svg = d3.select("#mapSVGFramework");
 
     var x = d3.scaleLinear()
-        .domain([allYear[0], allYear[allYear.length - 1])
+        .domain([allYear[0], allYear[allYear.length - 1]])
         .range([0, mapSVGWidth])
         .clamp(true);
 
