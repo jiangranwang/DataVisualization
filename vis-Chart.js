@@ -95,6 +95,7 @@ var initialiseChart = function(data) {
                 .on("click", () => {
                     changeVisibility(data[i]["State"].replace(/[^a-zA-Z]/g, ""));
                 })
+                .attr("stroke-width", 2)
                 .attr("x1", yearScale(data[i]["Year"]))
                 .attr("x2", yearScale(data[i + 1]["Year"]))
                 .attr("y1", totalStudentScale(data[i]["Total"]))
