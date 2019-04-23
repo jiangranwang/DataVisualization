@@ -14,11 +14,15 @@ var initialiseMap = function () {
       .attr("y1", "0%")
       .attr("x2", "100%")
       .attr("y2", "0%");
+    var stops = [{offset: 0, color: startColour}];
+    for (var i = 100; i <= 1500; i += 100){
+      stops.push({offset: studentRatioScale(i), color: studentColourScale(i)});
+    }
     linearGradient.selectAll("stop")
-      .data( studentColourScale.range() )
+      .data(stops)
       .enter().append("stop")
-      .attr("offset", function(d,i) { return i/(studentColourScale.range().length-1); })
-      .attr("stop-color", function(d) { return d; });
+      .attr("offset", function(d,i) { return d.offset; })
+      .attr("stop-color", function(d) { return d.color; });
     mapSVG.append("rect")
       .attr("x", legendPosX)
       .attr("y", legendPosY)
@@ -32,11 +36,23 @@ var initialiseMap = function () {
     mapSVG.append("text")
       .attr("x", legendPosX+280)
       .attr("y", legendPosY+35)
-      .text("1500 Students(TO-FIX)");
+      .text("1500 Students");
     mapSVG.append("text")
-      .attr("x", legendPosX+140)
+      .attr("x", legendPosX+studentRatioScale(10)*280)
       .attr("y", legendPosY+35)
-      .text("750");
+      .text("10");
+    mapSVG.append("text")
+      .attr("x", legendPosX+studentRatioScale(50)*280)
+      .attr("y", legendPosY+35)
+      .text("50");
+    mapSVG.append("text")
+      .attr("x", legendPosX+studentRatioScale(200)*280)
+      .attr("y", legendPosY+35)
+      .text("200");
+    mapSVG.append("text")
+      .attr("x", legendPosX+studentRatioScale(1000)*280)
+      .attr("y", legendPosY+35)
+      .text("1000");
     mapSVG.append("rect")
       .attr("x", legendPosX+125)
       .attr("y", legendPosY-50)

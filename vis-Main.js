@@ -78,9 +78,14 @@ const incomingStudentThreshold = 5000;
  * Used in @function studentNumberToColour
  */
 const studentColourScale = d3.scaleLog()
-  .base(2)
+  .base(10)
   .domain([1, incomingStudentThreshold])
   .range([startColour, endColour]);
+
+const studentRatioScale = d3.scaleLog()
+  .base(10)
+  .domain([1, incomingStudentThreshold])
+  .range([0, 1]);
 
 /**
  * A function to transform number of students to colour.
