@@ -32,9 +32,9 @@ var initialiseChart = function(data) {
         .offset([-5, 0])
         .html((d) => {
             if (d["Total"] <= 1) {
-                return d["Total"] + " student comming from " + d["State"] + " in " + d["Year"];
+                return "<u>" + d["Total"] + "</u> student comming from <u>" + d["State"] + "</u> in <u>" + d["Year"] + "</u>.";
             }
-            return d["Total"] + " students comming from " + d["State"] + " in " + d["Year"];
+            return "<u>" + d["Total"] + "</u> students comming from <u>" + d["State"] + "</u> in <u>" + d["Year"] + "</u>.";
         });
     svg.call(dotTip);
     
@@ -87,6 +87,7 @@ var initialiseChart = function(data) {
                 })
                 .on("click", () => {
                     changeVisibility(data[i]["State"].replace(/[^a-zA-Z]/g, ""));
+                    dotTip.hide(data[i]);
                 });
         if (i < data.length - 1 && data[i]["State"] == data[i + 1]["State"]) {
             d3.select("#" + data[i]["State"].replace(/[^a-zA-Z]/g, ""))

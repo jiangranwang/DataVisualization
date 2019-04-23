@@ -1,9 +1,20 @@
 html * {
-  font-family: Roboto Slab;
+  font-family: Athelas Regular, serif /*!important*/;
+}
+
+h1 {
+  font-family: Athelas Bold;
+  text-align-last: center;
+}
+
+p {
+  font-size: 12pt;
+  font-display: Athelas Regular, serif;
+  align-items: center;
 }
 
 .ticks {
-    font: 10px;
+    font: 9px;
 }
 
 .track,
@@ -38,8 +49,7 @@ html * {
 }
 
 #chartTitle {
-    font-family: 'Roboto Slab', serif;
-    font-size: 10pt;
+    font-size: 12pt;
 }
 
 .d3-tip, .d3-tip:after {
