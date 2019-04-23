@@ -1,16 +1,21 @@
 html * {
-  font-family: Athelas Regular, serif /*!important*/;
+  font-family: Athelas Regular, serif;
 }
 
 h1 {
   font-family: Athelas Bold;
-  text-align-last: center;
+  text-align: center;
+}
+
+h2 {
+  text-align: "right";
+  font-size: 20pt;
 }
 
 p {
-  font-size: 12pt;
+  font-size: 14pt;
   font-display: Athelas Regular, serif;
-  align-items: center;
+  text-align: center;
 }
 
 .ticks {
@@ -58,7 +63,6 @@ p {
 }
 
 .d3-tip {
-    font-family: "Athelas Regular", serif;
     font-weight: 700;
     padding: 12px;
     background: rgba(0, 0, 0, .8);
