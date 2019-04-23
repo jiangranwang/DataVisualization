@@ -85,7 +85,7 @@ var drawMap = function (currYear, data) {
     }
      
 		var graph = svg.selectAll("path")
-          .data(json.features)
+          .data(json.features);
     graph.enter()
           .append("path")
           .merge(graph)

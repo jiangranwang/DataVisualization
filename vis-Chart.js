@@ -9,53 +9,60 @@ const dotRadius = 3;
  */
 var initialiseChart = function(data) {
     var svg = d3.select("#chartSVG");
+
     var yearScale = d3.scaleLinear()
                     .domain([allYear[0], allYear[allYear.length - 1]])
                     .range([0, chartSVGWidth]);
     var xAxis = d3.axisBottom()
                     .scale(yearScale);
-
     var totalStudentScale = d3.scaleLog()
                     .base(10)
                     .domain([1, highestIncomingStudent])
                     .range([chartSVGHeight, 0]);
-
     var colourScale = studentNumberToColour;
-
     // TODO: change the tick of the y Axis
-    var yAxis = d3.axisLeft().scale(totalStudentScale);
-                    //.ticks([1, 10, 100, 500, 10000, 30000]);
-
-    // TODO: tip CSS apparence
-    var theTip = d3.tip()
-        .attr('class', 'd3-tip')
-        .offset([-5, 0])
-        .html((d) => {
-            return d["Total"] + " students comming from " + d["State"] + " in " + d["Year"];
-        });
-    svg.call(theTip);
-    
+    var yAxis = d3.axisLeft().scale(totalStudentScale).ticks(100).tickFormat(d3.format(",.2r"));
     svg.append("g")
         .attr("transform", "translate(0" + "," + chartSVGHeight + ")")
         .call(xAxis);
     svg.append("g")
         .call(yAxis);
+        
+    var dotTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-5, 0])
+        .html((d) => {
+            return d["Total"] + " students comming from " + d["State"] + " in " + d["Year"];
+        });
+    svg.call(dotTip);
     
     var chartTitleGroup = svg.append("g").attr("id", "chartTitle");
-    
+    var xTitleTransform = chartSVGHeight + 40;
     chartTitleGroup.append("text")
         .text("Year")
-        .attr("transform", "translate(" + chartSVGWidth / 2 + "," + chartSVGHeight + ")");
-    
+        .attr("transform", "translate(" + chartSVGWidth / 2 + "," + xTitleTransform + ")");
     chartTitleGroup.append("text")
-        .text("Number of Incoming Students")
-        .attr("transform", "rotate(270)")
-        .attr("transform", "translate(" + chartSVGWidth / 2 + "," + 0 + ")");
+        .text("Number of Incoming Students in log 10")
+        .attr("text-anchor", "middle")
+        .attr("transform", "translate(" + -50 + "," + chartSVGHeight / 2 + ")" + "rotate(90)");
+
+    // var defs = svg.append("defs");
+    // var linearGradient = defs.append("linearGradient")
+    //         .attr("id", "linear-gradient");
+    // linearGradient
+    //         .attr("x1", "0%")
+    //         .attr("y1", "0%")
+    //         .attr("x2", "100%")
+    //         .attr("y2", "0%");
+    // linearGradient.selectAll("stop")
+    //         .data( colourScale.range() )
+    //         .enter().append("stop")
+    //         .attr("offset", (i) => { return i/(colorScale.range().length-1); })
+    //         .attr("stop-color", (d) => { return d; });
 
     allStateName.forEach(stateName => {
         svg.append("g").attr("id", stateName).style("Visibility", "hidden");
     })
-
     for (let i = 0; i < data.length; i++) {
         d3.select("#" + data[i]["State"].replace(/[^a-zA-Z]/g, ""))
             .append("circle")
@@ -65,11 +72,14 @@ var initialiseChart = function(data) {
                 .attr("fill", "white")
                 .attr("stroke", colourScale(data[i]["Total"]))
                 .attr("id", data[i]["Year"] + " " + data[i]["State"])
-                .on("mouseover", (d) => {
-                    theTip.show(data[i]);
+                .on("mouseover", () => {
+                    dotTip.show(data[i]);
                 })
                 .on("mouseout", () => {
-                    theTip.hide(data[i]);
+                    dotTip.hide(data[i]);
+                })
+                .on("click", () => {
+                    changeVisibility(data[i]["State"].replace(/[^a-zA-Z]/g, ""));
                 });
         if (i < data.length - 1 && data[i]["State"] == data[i + 1]["State"]) {
             d3.select("#" + data[i]["State"].replace(/[^a-zA-Z]/g, ""))
@@ -80,6 +90,9 @@ var initialiseChart = function(data) {
                 .attr("y2", totalStudentScale(data[i + 1]["Total"]))
                 // TODO: Linear Changing colour for each line
                 .attr("stroke", colourScale(data[i]["Total"]));
+                /*() => {
+                    return "url(#" + "linear-gradient" + d.department.replace(/[^a-zA-Z]/g, "") + ")"
+                });*/
         }
     }
 }

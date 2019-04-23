@@ -6,7 +6,7 @@ const mapSVGMargin = new Margin(50, 50, 50, 50);
 /**
  * Margin info for chartSVG.
  */
-const chartSVGMargin = new Margin(50, 50, 50, 50);
+const chartSVGMargin = new Margin(50, 50, 60, 40);
 
 /**
  * Margin-included height for both SVG canvas.
@@ -66,14 +66,20 @@ var allStateName = [];
  */
 var highestIncomingStudent = 0;
 
-var IncomingStudentThreshold = 5000;
+/**
+ * Constant for transforming students number to corresponding colour.
+ * If the student number is higher than this, another colour scheme would be applied.
+ * Used in @function studentNumberToColour
+ */
+const incomingStudentThreshold = 5000;
 
 /**
  * A color scale for the number of students
+ * Used in @function studentNumberToColour
  */
-var studentColourScale = d3.scaleLog()
+const studentColourScale = d3.scaleLog()
   .base(2)
-  .domain([1, IncomingStudentThreshold])
+  .domain([1, incomingStudentThreshold])
   .range([startColour, endColour]);
 
 /**
@@ -81,7 +87,7 @@ var studentColourScale = d3.scaleLog()
  * @param {Number} number number of students.
  */
 var studentNumberToColour = function(number) {
-  if (number < IncomingStudentThreshold) {
+  if (number < incomingStudentThreshold) {
     return studentColourScale(number);
   }
   return "red";
@@ -92,7 +98,7 @@ var studentNumberToColour = function(number) {
  * drawMap() should respond to this variables.
  */
 var yearPrev = 0;
-var year = yearPrev;
+// var year = yearPrev;
 
 /**
  * JQuery starting point to start visualising data.
