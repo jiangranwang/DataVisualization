@@ -1,40 +1,44 @@
+html * {
+  font-family: Roboto Slab;
+}
+
 .ticks {
-    font: 10px sans-serif;
-  }
+    font: 10px;
+}
 
-  .track,
-  .track-inset,
-  .track-overlay {
-    stroke-linecap: round;
-  }
+.track,
+.track-inset,
+.track-overlay {
+  stroke-linecap: round;
+}
 
-  .track {
-    stroke: #000;
-    stroke-opacity: 0.3;
-    stroke-width: 10px;
-  }
+.track {
+  stroke: #000;
+  stroke-opacity: 0.3;
+  stroke-width: 10px;
+}
 
-  .track-inset {
-    stroke: #ddd;
-    stroke-width: 8px;
-  }
+.track-inset {
+  stroke: #ddd;
+  stroke-width: 8px;
+}
 
-  .track-overlay {
-    pointer-events: stroke;
-    stroke-width: 50px;
-    stroke: transparent;
-    cursor: crosshair;
-  }
+.track-overlay {
+  pointer-events: stroke;
+  stroke-width: 50px;
+  stroke: transparent;
+  cursor: crosshair;
+}
 
-  .handle {
-    fill: #fff;
-    stroke: #000;
-    stroke-opacity: 0.5;
-    stroke-width: 1.25px;
-  }
+.handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}
 
 #chartTitle {
-    font-family: Georgia;
+    font-family: 'Roboto Slab', serif;
     font-size: 10pt;
 }
 
@@ -44,6 +48,7 @@
 }
 
 .d3-tip {
+    font-family: "Athelas Regular", serif;
     font-weight: 700;
     padding: 12px;
     background: rgba(0, 0, 0, .8);
