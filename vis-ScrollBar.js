@@ -59,6 +59,7 @@ var drawScrollBar = function(data) {
         if (year!=yearPrev) {
             yearPrev = year;
             drawMap(year,data);
+            dashedGrid(year);
         }
     }
 }

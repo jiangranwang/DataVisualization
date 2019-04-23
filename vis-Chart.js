@@ -26,6 +26,16 @@ var initialiseChart = function(data) {
         .call(xAxis);
     svg.append("g")
         .call(yAxis);
+
+    d3.select("#chartSVG").append("line")
+    .attr("id", "dashedLine")
+    .attr("stroke-width", 0.5)
+    .attr("stroke", "black")
+    .attr("opacity", 0.4)
+    .attr("x1", yearScale(allYear[0]))
+    .attr("x2", yearScale(allYear[0]))
+    .attr("y1", 0)
+    .attr("y2", chartSVGHeight);
         
     var dotTip = d3.tip()
         .attr('class', 'd3-tip')
@@ -127,4 +137,18 @@ var changeVisibility = function(state) {
     // equivalent to document.getElementById if we select element by d3 with .node() command
     var group = d3.select("#" + state.replace(/[^a-zA-Z]/g, "")).node();
     group.style.visibility = group.style.visibility === "visible" ? "hidden" : "visible";
+}
+
+/**
+ * A helper function to update the position of the dashed grid.
+ * @param {int} year the current year we are displaying
+ */
+var dashedGrid = function(year) {
+    var yearScale = d3.scaleLinear()
+    .domain([allYear[0], allYear[allYear.length - 1]])
+    .range([0, chartSVGWidth]);
+    d3.select("#dashedLine")
+    .transition()
+    .attr("x1", yearScale(year))
+    .attr("x2", yearScale(year))
 }
