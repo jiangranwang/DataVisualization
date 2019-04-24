@@ -16,12 +16,12 @@ const height = 720;
 /**
  * Margin-excluded width of the map SVG canvas.
  */
-const mapSVGWidth = 828 - mapSVGMargin.left - mapSVGMargin.right;
+const mapSVGWidth = 820 - mapSVGMargin.left - mapSVGMargin.right;
 
 /**
  * Margin-excluded width of the chart SVG canvas.
  */
-const chartSVGWidth = 552 - chartSVGMargin.left - chartSVGMargin.right;
+const chartSVGWidth = 548 - chartSVGMargin.left - chartSVGMargin.right;
 
 /**
  * Margin-excluded height of the map SVG canvas.
