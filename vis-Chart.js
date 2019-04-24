@@ -67,21 +67,6 @@ var initialiseChart = function(data) {
         .attr("text-anchor", "middle")
         .attr("transform", "translate(" + -50 + "," + chartSVGHeight / 2 + ")" + "rotate(90)");
     
-    /* ---------- Linear Gradient for Line Stroke ---------- */
-    // var defs = svg.append("defs");
-    // var linearGradient = defs.append("linearGradient")
-    //         .attr("id", "linear-gradient");
-    // linearGradient
-    //         .attr("x1", "0%")
-    //         .attr("y1", "0%")
-    //         .attr("x2", "100%")
-    //         .attr("y2", "0%");
-    // linearGradient.selectAll("stop")
-    //         .data( colourScale.range() )
-    //         .enter().append("stop")
-    //         .attr("offset", (i) => { return i/(colorScale.range().length-1); })
-    //         .attr("stop-color", (d) => { return d; });
-    
     /* ---------- Group Creation for Chart Elements ---------- */
     allStateName.forEach(stateName => {
         svg.append("g").attr("id", stateName).style("Visibility", "hidden");
@@ -118,11 +103,7 @@ var initialiseChart = function(data) {
                 .attr("x2", yearScale(data[i + 1]["Year"]))
                 .attr("y1", totalStudentScale(data[i]["Total"]))
                 .attr("y2", totalStudentScale(data[i + 1]["Total"]))
-                // TODO: Linear Changing colour for each line
                 .attr("stroke", studentNumberToColour(data[i]["Total"]));
-                /*() => {
-                    return "url(#" + "linear-gradient" + d.department.replace(/[^a-zA-Z]/g, "") + ")"
-                });*/
         }
     }
 }
@@ -143,7 +124,7 @@ var changeVisibility = function(state) {
 
 /**
  * A helper function to update the position of the dashed grid.
- * @param {int} year the current year we are displaying
+ * @param {Number} year the current year we are displaying
  */
 var dashedGrid = function(year) {
     var yearScale = d3.scaleLinear()

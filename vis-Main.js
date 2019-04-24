@@ -74,7 +74,7 @@ var highestIncomingStudent = 0;
 const incomingStudentThreshold = 5000;
 
 /**
- * A color scale for the number of students
+ * A color scale for the number of students.
  * Used in @function studentNumberToColour
  */
 const studentColourScale = d3.scaleLog()
@@ -82,6 +82,10 @@ const studentColourScale = d3.scaleLog()
   .domain([1, incomingStudentThreshold])
   .range([startColour, endColour]);
 
+/**
+ * A ratio scale for the number of students.
+ * Used in @function drawMap
+ */
 const studentRatioScale = d3.scaleLog()
   .base(10)
   .domain([1, incomingStudentThreshold])
@@ -103,7 +107,6 @@ var studentNumberToColour = function(number) {
  * drawMap() should respond to this variables.
  */
 var yearPrev = 0;
-// var year = yearPrev;
 
 /**
  * JQuery starting point to start visualising data.
@@ -148,7 +151,6 @@ $(function() {
           .attr("id", "chartSVG");
 
     initialiseMap();
-    //drawMap(allYear[0], data);
     drawScrollBar(data);
     initialiseChart(data);
   });

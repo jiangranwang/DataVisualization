@@ -67,7 +67,7 @@ var initialiseMap = function () {
 
 /**
  * The main function to append map onto the svg we created
- * @param {int} currYear the year we would like to display on the map
+ * @param {Number} currYear the year we would like to display on the map
  * @param {Array} data the array of data that we would like to visualise
  */
 var drawMap = function (currYear, data) {

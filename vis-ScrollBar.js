@@ -48,18 +48,11 @@ var drawScrollBar = function(data) {
 
     slider.transition() // Gratuitous intro!
         .duration(1000)
-        .tween("hue", function() {
-            //var i = d3.interpolate(allYear[0], allYear[0]);
-            return function(t) {
-                hue(allYear[0]);
-            };
-        });
-    //yearPrev = 2005;
+        .tween("hue", hue(allYear[0]));
+
     function hue(h) {
         year = Math.round(h);
         handle.attr("cx", x(year));
-        //svg.style("background-color", d3.hsl(h%360, 0.8, 0.8));
-        //console.log(yearPrev);
         if (year!=yearPrev) {
             yearPrev = year;
             drawMap(year,data);
