@@ -1,15 +1,14 @@
 html * {
-  font-family: Athelas Regular, serif;
+  font-family: Athelas, serif;
 }
 
 h1 {
-  font-family: Athelas Bold;
+  font-family: Athelas;
   text-align: center;
 }
 
 h2 {
   text-align: "right";
-  font-size: 20pt;
 }
 
 .ticks {
@@ -45,10 +44,6 @@ h2 {
   stroke: #000;
   stroke-opacity: 0.5;
   stroke-width: 1.25px;
-}
-
-#chartTitle {
-    font-size: 12pt;
 }
 
 .d3-tip, .d3-tip:after {
