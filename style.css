@@ -1,14 +1,5 @@
 html * {
-  font-family: Athelas, serif;
-}
-
-h1 {
-  font-family: Athelas;
-  text-align: center;
-}
-
-h2 {
-  text-align: "right";
+  font-family: Cardo, sans-serif;
 }
 
 .ticks {

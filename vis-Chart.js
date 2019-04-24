@@ -27,6 +27,7 @@ var initialiseChart = function(data) {
     svg.append("g")
         .call(yAxis);
 
+    /* ---------- Dashed line on chart ---------- */
     d3.select("#chartSVG").append("line")
     .attr("id", "dashedLine")
     .attr("stroke-width", 0.5)
