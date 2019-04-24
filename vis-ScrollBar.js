@@ -24,7 +24,11 @@ var drawScrollBar = function(data) {
             .attr("class", "track-overlay")
             .call(d3.drag()
                 .on("start.interrupt", function() { slider.interrupt(); })
-                .on("start drag", function() { hue(x.invert(d3.event.x)); })
+                .on("start drag", function() { 
+                    if (d3.event.y > 40)
+                        return;
+                    hue(x.invert(d3.event.x)); 
+                })
             );
 
     slider.insert("g", ".track-overlay")
