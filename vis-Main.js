@@ -14,14 +14,24 @@ const chartSVGMargin = new Margin(50, 50, 60, 40);
 const height = 720;
 
 /**
+ * Margin-included width for both SVG canvas.
+ */
+const width = 1368;
+
+/**
+ * How much space would mapSVG taken.
+ */
+const widthRatio = 0.6;
+
+/**
  * Margin-excluded width of the map SVG canvas.
  */
-const mapSVGWidth = 820 - mapSVGMargin.left - mapSVGMargin.right;
+const mapSVGWidth = width * widthRatio - mapSVGMargin.left - mapSVGMargin.right;
 
 /**
  * Margin-excluded width of the chart SVG canvas.
  */
-const chartSVGWidth = 548 - chartSVGMargin.left - chartSVGMargin.right;
+const chartSVGWidth = width * (1 - widthRatio) - chartSVGMargin.left - chartSVGMargin.right;
 
 /**
  * Margin-excluded height of the map SVG canvas.
@@ -133,6 +143,8 @@ $(function() {
     allStateName.sort();
 
     d3.select("#visualisation")
+        .append("span") //Using "span" to inline multiple items
+          .attr("id", "inlineSVG")
         .append("svg")
           .attr("id", "mapSVGFramework")
           .attr("width", mapSVGWidth + mapSVGMargin.left + mapSVGMargin.right)
@@ -142,6 +154,8 @@ $(function() {
           .attr("id", "mapSVG");
 
     d3.select("#visualisation")
+        .append("span")
+          .attr("id", "inlineSVG")
         .append("svg")
           .attr("id", "chartSVGFramework")
           .attr("width", chartSVGWidth + chartSVGMargin.left + chartSVGMargin.right)

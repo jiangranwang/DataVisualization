@@ -2,6 +2,14 @@ html * {
   font-family: Cardo, sans-serif;
 }
 
+#divisionLine {
+  border-width: 5pt;
+}
+
+#inlineSVG {
+  align-self: center;
+}
+
 .ticks {
     font: 9px;
 }
