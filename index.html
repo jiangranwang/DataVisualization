@@ -4,9 +4,11 @@
     <title>U of I Domestic Student Distribution VISUALISATION</title>
     <meta charset="utf-8">
     <meta lang="en">
-    <!-- Functional JavaScript and CSS-->
+
+    <!-- Functional JavaScript and CSS -->
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <!-- Personal CSS -->
       <link href="https://fonts.googleapis.com/css?family=Cardo|Permanent+Marker" rel="stylesheet">
       <link href="style.css" rel="stylesheet">
 
@@ -24,20 +26,26 @@
     <script src="vis-Chart.js"></script>
     <script src="vis-ScrollBar.js"></script>
 
-    <h1 style="text-align: center; font-weight: 700; font-family: Permanent Marker;"><img src = "illini.png" height="50" align="left"></img> U of I domestic student distribution VISUALISATION </h1>
-    <h2 style="text-align: center; font-size: 20pt; font-weight: 600">From team: What the Hell is the Name Again<img src="swag.gif" height="30px"></img></h2>
-    <p style="text-align: center">Drag the scroll bar to change the year of the map. <br>
-    Click the map to show the number of incoming studets from each state on the right chart. <br>
-    Mouseover the map or dot to see detailed information! <br>
-    Click on the chart or the map to remove the display on chart.</p>
   </head>
 
   <body>
-    <div class="mapVisualiser">
-      <div id="visualisation" align="center"></div>
-    </div>
+    <section id="mainText">
+      <h1 style="text-align: center; font-weight: 700; font-family: Permanent Marker;"><img src = "illini.png" height="50" align="left"></img> U of I domestic student distribution VISUALISATION </h1>
+      <h2 style="text-align: center; font-size: 20pt; font-weight: 600">From team: What the Hell is the Name Again<img src="swag.gif" height="30px"></img></h2>
+      <p style="text-align: center; border: medium solid black; background: whitesmoke" >
+      Drag the scroll bar to change the year of the map. <br>
+      Click the map to show the number of incoming studets from each state on the right chart. <br>
+      Mouseover the map or dot to see detailed information! <br>
+      Click on the chart or the map to remove the display on chart.</p>
+    </section>
+
+    <!-- All the visualisations created by custom JavaScript will be appeared in here -->
+    <div id="visualisation" align="center"></div>
+
+    <footer style="text-align:center">
+        <p> Visualized by Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, and Jiangran Wang <p>
+    </footer>
+
   </body>
-  <footer style="text-align:center">
-    <p> Visualized by Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, and Jiangran Wang <p>
-  </footer>
+  
 </html>
