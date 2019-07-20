@@ -6,10 +6,6 @@ html * {
   border-width: 5pt;
 }
 
-#inlineSVG {
-  align-self: center;
-}
-
 .ticks {
     font: 9px;
 }

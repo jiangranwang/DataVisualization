@@ -143,8 +143,8 @@ $(function() {
     allStateName.sort();
 
     d3.select("#visualisation")
-        .append("span") //Using "span" to inline multiple items
-          .attr("id", "inlineSVG")
+        // .append("span") //Using "span" to inline multiple items
+        //   .attr("id", "inlineSVG")
         .append("svg")
           .attr("id", "mapSVGFramework")
           .attr("width", mapSVGWidth + mapSVGMargin.left + mapSVGMargin.right)
@@ -154,8 +154,8 @@ $(function() {
           .attr("id", "mapSVG");
 
     d3.select("#visualisation")
-        .append("span")
-          .attr("id", "inlineSVG")
+        // .append("span")
+        //   .attr("id", "inlineSVG")
         .append("svg")
           .attr("id", "chartSVGFramework")
           .attr("width", chartSVGWidth + chartSVGMargin.left + chartSVGMargin.right)
