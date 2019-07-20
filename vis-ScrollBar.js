@@ -3,7 +3,7 @@
  * @param {Array} data the data we would like to visualise
  */
 var drawScrollBar = function(data) {
-    svg = d3.select("#mapSVGFramework");
+    svg = d3.select("#mapSVG");
 
     var x = d3.scaleLinear()
         .domain([allYear[0], allYear[allYear.length - 1]])
@@ -11,8 +11,10 @@ var drawScrollBar = function(data) {
         .clamp(true);
 
     var slider = svg.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + 50 + "," + mapSVGHeight/10 + ")");
+        .attr("class", "slider");
+        //.attr("transform", "translate(" + 50 + "," + mapSVGHeight/10 + ")");
+        // No need to translate the slider anymore as it goes straight under #mapSVG instead of #mapSVGFramework
+        // which is already transformed by default
 
     slider.append("line")
             .attr("class", "track")
@@ -25,7 +27,7 @@ var drawScrollBar = function(data) {
             .call(d3.drag()
                 .on("start.interrupt", function() { slider.interrupt(); })
                 .on("start drag", function() { 
-                    if (d3.event.y > 40)
+                    if (d3.event.y > 15)
                         return;
                     hue(x.invert(d3.event.x)); 
                 })
