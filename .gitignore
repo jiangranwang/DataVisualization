@@ -1,3 +1,4 @@
 #IDE temp files
 .vscode/
 .idea/
+.eslintrc.js
