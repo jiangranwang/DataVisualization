@@ -170,6 +170,7 @@ d3.csv('data-modified.csv').then(function (data) {
   initialiseMap()
   drawScrollBar(data)
   initialiseChart(data)
+  gitHubInfo()
 })
 
 /**
@@ -515,7 +516,7 @@ function dashedGrid (year) {
     .attr('x2', yearScale(year))
 }
 
-(() => {
+function gitHubInfo () {
   const httpRequest = new XMLHttpRequest()
   httpRequest.open('GET', 'https://api.github.com/repos/int0thewind/CS-296-Project-2/commits')
   httpRequest.onload = () => {
@@ -530,4 +531,4 @@ function dashedGrid (year) {
     }
   }
   httpRequest.send()
-})()
+}
