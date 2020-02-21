@@ -1,49 +1,49 @@
 <!doctype html>
 <html>
-  <head>
-    <title>U of I Domestic Student Distribution VISUALISATION</title>
-    <meta charset="utf-8">
-    <meta lang="en">
+<head>
+	<title>U of I Domestic Student Distribution VISUALISATION</title>
+	<meta charset="utf-8">
+	<meta lang="en">
 
-    <!-- Functional JavaScript and CSS -->
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <!-- Personal CSS -->
-      <link href="https://fonts.googleapis.com/css?family=Cardo|Permanent+Marker" rel="stylesheet">
-      <link href="./style.css" rel="stylesheet">
+	<!-- Functional JavaScript and CSS -->
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- Personal CSS -->
+	<link href="https://fonts.googleapis.com/css?family=Cardo|Permanent+Marker" rel="stylesheet">
+	<link href="./src/style.css" rel="stylesheet">
 
-      <!-- jQuery and lodash -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+	<!-- jQuery and lodash -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
-      <script src="./visulisation.js" type="module"></script>
+	<script src="./src/visulisation.js" type="module"></script>
 
-  </head>
+</head>
 
-  <body>
-    <section id="mainText">
-      <h1 style="text-align: center; font-weight: 700; font-family: Permanent Marker;"><img src = "./illini.png" height="50" style="float: left">U of I domestic student distribution VISUALISATION </h1>
-      <h2 style="text-align: center; font-size: 20pt; font-weight: 600">From team: What the Hell is the Name Again<img src="./swag.gif" height="30px"></img></h2>
-      <p style="text-align: center;
-        border: medium solid black; background: whitesmoke;
-        margin-left: 100pt;
-        margin-right: 100pt">
-      Drag the scroll bar to change the year of the map. <br>
-      Click the map to show the number of incoming studets <br> from each state on the right chart. <br>
-      Mouseover the map or dot to see detailed information! <br>
-      Click on the chart or the map to remove the display on chart.</p>
-    </section>
-    <hr id="divisionLine">
+<body>
+	<section id="mainText">
+	<h1 style="text-align: center; font-weight: 700; font-family: Permanent Marker;"><img src = "./src/illini.png" height="50" style="float: left">U of I domestic student distribution VISUALISATION </h1>
+	<h2 style="text-align: center; font-size: 20pt; font-weight: 600">From team: What the Hell is the Name Again<img src="./src/swag.gif" height="30px"></img></h2>
+	<p style="text-align: center;
+		border: medium solid black; background: whitesmoke;
+		margin-left: 100pt;
+		margin-right: 100pt">
+	Drag the scroll bar to change the year of the map. <br>
+	Click the map to show the number of incoming studets <br> from each state on the right chart. <br>
+	Mouseover the map or dot to see detailed information! <br>
+	Click on the chart or the map to remove the display on chart.</p>
+	</section>
+	<hr id="divisionLine">
 
-    <!-- All the visualisations created by custom JavaScript will be appeared in here -->
-    <div id="visualisation" style="text-align: center"></div>
+	<!-- All the visualisations created by custom JavaScript will be appeared in here -->
+	<div id="visualisation" style="text-align: center"></div>
 
-    <hr id="divisionLine">
-    <footer style="text-align:center">
-        <p> Visualized by Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, and Jiangran Wang <p>
-        <p id="github"></p>
-    </footer>
+	<hr id="divisionLine">
+	<footer style="text-align:center">
+		<p> Visualized by Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, and Jiangran Wang <p>
+		<p id="github"></p>
+	</footer>
 
-  </body>
-  
+</body>
+
 </html>
